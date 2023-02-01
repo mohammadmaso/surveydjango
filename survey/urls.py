@@ -14,4 +14,5 @@ router.register(r"SurveyResult", views.SurveyResultViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("update/<int:pk>/", views.SurveyUpdateView.as_view()),
 ]

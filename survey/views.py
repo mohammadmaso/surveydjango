@@ -9,6 +9,10 @@ from survey.serializers import (
     SurveyResultSerializer,
 )
 from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.http import Http404
+from rest_framework import serializers
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -39,6 +43,27 @@ class SurveySchemaViewSet(viewsets.ModelViewSet):
     queryset = SurveySchemaModel.objects.all()
     serializer_class = SurveySchemaSerializer
     permission_classes = [permissions.AllowAny]
+    http_method_names = ["get", "put", "post", "head", "delete"]
+
+
+class SurveyUpdateView(APIView):
+    def get_object(self, pk):
+        try:
+            return SurveySchemaModel.objects.get(pk=pk)
+        except SurveySchemaModel.DoesNotExist:
+            raise Http404
+
+    def put(self, request, pk, format=None):
+        survey = self.get_object(pk)
+        print(survey)
+        serializer = SurveySchemaSerializer(survey, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print(request.data)
+            survey.content = request.data["json"]
+            survey.save()
+            return Response({"message": "Ok"})
+        return Response({"message": "error"})
 
 
 class SurveyResultViewSet(viewsets.ModelViewSet):
@@ -49,11 +74,7 @@ class SurveyResultViewSet(viewsets.ModelViewSet):
     queryset = SurveyResultModel.objects.all()
     serializer_class = SurveyResultSerializer
     permission_classes = [permissions.AllowAny]
-    permission_classes_per_method = {
-        # except for list and retrieve where both users with "write" or "read-only"
-        # permissions can access the endpoints.
-        "get_queryset": [IsAuthenticated],
-    }
+    http_method_names = ["get", "post", "head", "delete"]
 
     def get_queryset(self):
         """

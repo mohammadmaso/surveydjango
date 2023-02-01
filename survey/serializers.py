@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from survey.models import SurveyResultModel, SurveySchemaModel
@@ -7,21 +6,22 @@ from survey.models import SurveyResultModel, SurveySchemaModel
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ["url", "username", "email", "groups"]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ['url', 'name']
+        fields = ["url", "name"]
+
 
 class SurveySchemaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SurveySchemaModel
-        fields = ['id', 'content', 'title']
+        fields = ["id", "content", "title"]
 
 
-class SurveyResultSerializer(serializers.HyperlinkedModelSerializer):
+class SurveyResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurveyResultModel
-        fields = ['id', 'content','survey_schema_id']
+        fields = ["id", "content", "survey_schema_id"]
