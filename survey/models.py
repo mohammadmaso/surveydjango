@@ -4,7 +4,8 @@ from django.db import models
 
 class SurveySchemaModel(models.Model):
     id = models.AutoField(primary_key=True)
-    content = models.JSONField()
+    content = models.JSONField(null=True, blank=True)
+    title = models.TextField(null=True,blank=True)
 
 class SurveyResultModel(models.Model):
     id = models.AutoField(primary_key=True)
