@@ -18,7 +18,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class SurveySchemaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SurveySchemaModel
-        fields = ['id', 'content']
+        fields = ['id', 'content', 'title']
 
 
 class SurveyResultSerializer(serializers.HyperlinkedModelSerializer):
