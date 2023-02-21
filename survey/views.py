@@ -42,7 +42,8 @@ class SurveySchemaViewSet(viewsets.ModelViewSet):
 
     queryset = SurveySchemaModel.objects.all()
     serializer_class = SurveySchemaSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]
     http_method_names = ["get", "put", "post", "head"]
 
 
