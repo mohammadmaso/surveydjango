@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "tg)@gf$8gd70vw(-=16udt09-&%u3ji@@6=osff0i7sz+k379d"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["survey-api.mohammadmaso.ir", "127.0.0.1"]
 
