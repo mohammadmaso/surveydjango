@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "tg)@gf$8gd70vw(-=16udt09-&%u3ji@@6=osff0i7sz+k379d"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["survey-api.mohammadmaso.ir", "127.0.0.1"]
+ALLOWED_HOSTS = ["survey-api.mohammadmaso.ir", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "user",
     "rest_framework",
+    "rest_framework_simplejwt",
     "survey",
 ]
 
@@ -119,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "fa-IR"
 
 TIME_ZONE = "UTC"
 
@@ -140,4 +142,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 REST_FRAMEWORK = {
     # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     # "PAGE_SIZE": 40,
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
 }
+
+AUTH_USER_MODEL = "user.User"

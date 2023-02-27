@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from survey.models import SurveySchemaModel, SurveyResultModel
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -8,6 +8,8 @@ from survey.serializers import (
     SurveySchemaSerializer,
     SurveyResultSerializer,
 )
+from django.contrib.auth import get_user_model
+
 from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,7 +22,7 @@ class UserViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
 
-    queryset = User.objects.all().order_by("-date_joined")
+    queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
