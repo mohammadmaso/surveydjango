@@ -75,8 +75,8 @@ class SurveyResultViewSet(viewsets.ModelViewSet):
     queryset = SurveyResultModel.objects.all()
     serializer_class = SurveyResultSerializer
     permission_classes = [permissions.AllowAny]
-    http_method_names = ["get", "post", "head", "delete"]
-    # http_method_names = ["post", "head"]
+    # http_method_names = ["get", "post", "head", "delete"]
+    http_method_names = ["post", "head"]
 
     def get_queryset(self):
         """
